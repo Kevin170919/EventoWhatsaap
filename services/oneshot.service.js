@@ -77,7 +77,7 @@ async function firmarDocumento(sumilladoBuffer, extraDocBuffer, options = {}) {
   const signResponse = await axios.post(
     `${ONESHOT_BASE_URL}/api/sign/${signUuid}`,
     { otp: OTP_ESTATICO },
-    { headers: { "Content-Type": "application/json", ...authHeader }, httpsAgent: proxyAgent, timeout: 6500 }
+    { headers: { "Content-Type": "application/json", ...authHeader }, httpsAgent: proxyAgent, timeout: 45000 }
   )
   console.log("Firma response:", JSON.stringify(signResponse.data))
 
@@ -85,7 +85,7 @@ async function firmarDocumento(sumilladoBuffer, extraDocBuffer, options = {}) {
   console.log("=== ONESHOT PASO 5: /api/document signed ===")
   const docResponse = await axios.get(
     `${ONESHOT_BASE_URL}/api/document/${signUuid}/signed/${docId}`,
-    { headers: authHeader, httpsAgent: proxyAgent, responseType: "arraybuffer", timeout: 15000 }
+    { headers: authHeader, httpsAgent: proxyAgent, responseType: "arraybuffer", timeout: 45000 }
   )
 
   const signedPdfBuffer = Buffer.from(docResponse.data)
