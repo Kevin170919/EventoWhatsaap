@@ -56,7 +56,7 @@ async function firmarDocumento(sumilladoBuffer, extraDocBuffer, options = {}) {
 
   const uploadResponse = await axios.post(
     `${ONESHOT_BASE_URL}/api/upload-document/${signUuid}`, uploadForm,
-    { headers: { ...uploadForm.getHeaders(), ...authHeader }, httpsAgent: proxyAgent, timeout: 1000 }
+    { headers: { ...uploadForm.getHeaders(), ...authHeader }, httpsAgent: proxyAgent, timeout: 35000 }
   )
 
   let docId = uploadResponse.data?.detail
@@ -68,7 +68,7 @@ async function firmarDocumento(sumilladoBuffer, extraDocBuffer, options = {}) {
   console.log("=== ONESHOT PASO 3: /api/generate-otp ===")
   await axios.post(
     `${ONESHOT_BASE_URL}/api/generate-otp/${signUuid}`, null,
-    { headers: authHeader, httpsAgent: proxyAgent, timeout: 1000 }
+    { headers: authHeader, httpsAgent: proxyAgent, timeout: 10000 }
   )
   console.log("OTP generado ✓")
 
